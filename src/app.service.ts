@@ -6,9 +6,11 @@ import { CreateTweetDto } from './dtos/tweet.dto';
 
 @Injectable()
 export class AppService {
-  // getHello(): string {
-  //   return 'Hello World!';
-  // }
+  getHealth(): string {
+    return "I,m okay!";
+  }
+
+
   private users:User[] = [];
   private tweets:Tweet[] = []
 
@@ -27,6 +29,8 @@ export class AppService {
     return this.tweets.push(tweet);
   
   }
+
+  
 
   
 
