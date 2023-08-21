@@ -8,6 +8,12 @@ export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
+  getHello(): string {
+    return this.appService.getHello();
+  }
+
+  @Get()
+  @HttpCode(HttpStatus.OK)
   getHalth(): string {
     return this.appService.getHealth();
   }
@@ -22,14 +28,16 @@ export class AppController {
   @Post("tweets")
   @HttpCode(HttpStatus.CREATED)
   createTweet(@Body()body:CreateTweetDto){
-    return this.appService.PostTweet(body)
+    return this.appService.postTweet(body)
   }
     //  createtweet
   
-  // @Get("tweets")
-  // @HttpCode(HttpStatus.OK)
-  // // getTweet
+  @Get("tweets")
+  @HttpCode(HttpStatus.OK)
+  getTweets(@Query("page") page: number | null){
+    return this.appService.getTweets(page)
 
+  }
 
   // @Get("tweets/:username")
   // @HttpCode(HttpStatus.OK)

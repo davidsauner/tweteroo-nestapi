@@ -1,11 +1,17 @@
 import { Tweet } from './entities/tweet.entity';
-import { Injectable, Body, UnauthorizedException } from '@nestjs/common';
+import { Injectable, Body, UnauthorizedException, BadRequestException } from '@nestjs/common';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dtos/user.dto';
 import { CreateTweetDto } from './dtos/tweet.dto';
+import { last } from 'rxjs';
 
 @Injectable()
 export class AppService {
+
+  getHello(): string {
+    return "Hello world!";
+  }
+
   getHealth(): string {
     return "I,m okay!";
   }
@@ -20,7 +26,7 @@ export class AppService {
   }
 
 
-  PostTweet(body: CreateTweetDto){
+  postTweet(body: CreateTweetDto){
     const user = this.users.find(user => user.username === body.username);
     if(!user){
       throw new UnauthorizedException()
@@ -30,12 +36,42 @@ export class AppService {
   
   }
 
-  
-
-  
 
 
+  getTweets(page:number | null){
+    if(page && page < 1){
+      throw new BadRequestException('Informe uma página válida',
+      {cause : new Error(),
+      description:'Informe uma página válida'})
+    }
 
+    const lastTweets = this.tweets.reverse().map((tweet) => {
+      return {
+        username: tweet.user.username,
+        avatar: tweet.user.avatar,
+        tweet: tweet.tweet
+      };
+    });
 
+    if(!page && lastTweets.length <= 15){
+      return lastTweets;
+    }
+    if (!page && lastTweets.length > 15){
+      return lastTweets.slice(0,15)
+
+    }
+    if (page && page >= 1) {
+
+      const min = 15 * ( page - 1 );
+      const max = (15 * page) -1
+      const tweets = []
+
+      for (let i = min; i <= max && i < lastTweets.length; i++){
+        tweets.push(lastTweets[i])
+      }
+
+      return tweets;
+    }
+  }
 }
 
