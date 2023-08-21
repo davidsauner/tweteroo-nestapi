@@ -7,6 +7,6 @@ export class CreateTweetDto {
 
     @IsString()
     @IsNotEmpty({ message: " Todos os campos são necessários"})
-    tweets: string;
+    tweet: string;
 
 }
