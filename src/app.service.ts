@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { CreateUserDto } from './dtos/user.dto';
 import { CreateTweetDto } from './dtos/tweet.dto';
 import { last } from 'rxjs';
+import { userInfo } from 'os';
 
 @Injectable()
 export class AppService {
@@ -73,5 +74,23 @@ export class AppService {
       return tweets;
     }
   }
+
+  getTweetsByUser(username: string){
+
+    const user = this.tweets.filter(t => t.user.username === username);
+    if(user.length === 0){
+      return [];
+    }
+    return user.map(t =>{
+      return{
+        username: t.user.username,
+        avatar: t.user.avatar,
+        tweet: t.tweet
+      }
+    })
+  }
+
+  
+
 }
 

@@ -30,17 +30,19 @@ export class AppController {
   createTweet(@Body()body:CreateTweetDto){
     return this.appService.postTweet(body)
   }
-    //  createtweet
+    
   
   @Get("tweets")
   @HttpCode(HttpStatus.OK)
   getTweets(@Query("page") page: number | null){
-    return this.appService.getTweets(page)
+    return this.appService.getTweets(page);
 
   }
 
-  // @Get("tweets/:username")
-  // @HttpCode(HttpStatus.OK)
-  // // Getuserbyid
+  @Get("tweets/:username")
+  @HttpCode(HttpStatus.OK)
+  getTweetsByUser(@Param("username") username: string){
+    return this.appService.getTweetsByUser(username)
+  }
 
 }
