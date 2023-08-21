@@ -7,10 +7,10 @@ import { CreateTweetDto } from './dtos/tweet.dto';
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
-  }
+  // @Get()
+  // getHello(): string {
+  //   return this.appService.getHello();
+  // }
 
   @Post("sign-up")
   @HttpCode(HttpStatus.OK)
@@ -26,13 +26,13 @@ export class AppController {
   }
     //  createtweet
   
-  @Get("tweets")
-  @HttpCode(HttpStatus.OK)
-  // getTweet
+  // @Get("tweets")
+  // @HttpCode(HttpStatus.OK)
+  // // getTweet
 
 
-  @Get("tweets/:username")
-  @HttpCode(HttpStatus.OK)
-  // Getuserbyid
+  // @Get("tweets/:username")
+  // @HttpCode(HttpStatus.OK)
+  // // Getuserbyid
 
 }
