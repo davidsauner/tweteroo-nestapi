@@ -10,13 +10,10 @@ import { userInfo } from 'os';
 export class AppService {
 
   getHello(): string {
-    return "Hello world!";
-  }
-
-  getHealth(): string {
     return "I,m okay!";
   }
 
+  
 
   private users:User[] = [];
   private tweets:Tweet[] = []

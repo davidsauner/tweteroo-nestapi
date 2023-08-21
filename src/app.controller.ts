@@ -12,11 +12,7 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  getHalth(): string {
-    return this.appService.getHealth();
-  }
+ 
 
   @Post("sign-up")
   @HttpCode(HttpStatus.OK)
